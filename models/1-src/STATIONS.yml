@@ -16,4 +16,4 @@ sources:
     database: CITIBIKE
     schema: DEMO_SNOWPARK
     tables:
-      - name: STATIONS
+      - name: STATIONS_RAW

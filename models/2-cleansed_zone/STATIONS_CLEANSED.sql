@@ -11,4 +11,4 @@ select
 	NHOOD_NAME ,
 	BOROUGH_NAME,
 	NHOOD_GEO
-  from {{ source('STATIONS', 'STATIONS') }}
+  from {{ source('STATIONS', 'STATIONS_RAW') }}
