@@ -1,0 +1,25 @@
+version: 2
+
+models:
+    - name: STATIONS_CLEANSED
+      description: "All stations"
+      columns:
+          - name: STATION_ID
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
+    - name: TRIPS_CLEANSED
+      description: "A starter dbt model"
+      columns:
+          - name: tripid
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+          - name: duration
+            description: "total duration"
+            tests:
+                - is_positive
+

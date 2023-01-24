@@ -1,0 +1,20 @@
+select 
+    tripid,
+    v:STARTTIME::timestamp_ntz starttime,
+    v:ENDTIME::timestamp_ntz endtime,
+    datediff('minute', starttime, endtime) duration,
+    v:START_STATION_ID::integer start_station_id,
+    v:END_STATION_ID::integer end_station_id,
+    v:BIKE.BIKEID::string bikeid,
+    v:BIKE.BIKE_TYPE::string bike_type,
+    v:RIDER.RIDERID::integer riderid,
+    v:RIDER.FIRST_NAME::string || ' ' || v:RIDER.LAST_NAME::string rider_name,
+    to_date(v:RIDER.DOB::string, 'YYYY/MM/DD') dob,
+    v:RIDER.GENDER::string gender,
+    v:RIDER.MEMBER_TYPE::string member_type,
+    v:RIDER.PAYMENT.TYPE::string payment,
+    ifnull(v:RIDER.PAYMENT.CC_TYPE::string, 
+      v:RIDER.PAYMENT.PHONE_TYPE::string) payment_type,
+    ifnull(v:RIDER.PAYMENT.PHONE_NUM::string,
+      v:RIDER.PAYMENT.CC_NUM::string) payment_num
+  from {{ source('CITIBIKE', 'TRIPS_RAW') }}
